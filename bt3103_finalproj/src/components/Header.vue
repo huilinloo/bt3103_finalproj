@@ -13,7 +13,7 @@
       <li>
         <router-link to="/rewards" exact>Rewards</router-link>
       </li>
-      <img src = "logo greensg.PNG"></img>
+      <img src = "../assets/logo.png" alt = "not found"/>
       <li>
         <router-link to="/newsroom" exact>Newsroom</router-link>
       </li>
