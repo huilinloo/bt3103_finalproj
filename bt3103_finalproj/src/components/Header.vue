@@ -29,3 +29,29 @@
     </ul>
   </div>
 </template>
+
+<script>
+export default {
+
+}
+</script>
+<style scoped>
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  flex-grow: 1;
+  flex-basis: 300px;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #222;
+  margin: 10px;
+}
+img {
+    height: 7%;
+    width: 7%;
+}
+</style>
