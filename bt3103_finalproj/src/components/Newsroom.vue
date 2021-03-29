@@ -1,5 +1,9 @@
 <template>
   <div class="newslist">
+      <div class="announcements">
+          <h1> ANNOUNCEMENTS </h1>
+        <h2> announcements to be added here when an action is made </h2>
+    </div>
     <div class="container">
         <ul class="media-list">
             <li class="media" v-for="article in articles" v-bind:key=article>
@@ -48,15 +52,20 @@ export default {
 </script>
 
 <style scoped>
-    .media-object {
-        width: 300px;
-        padding: 5px;
-    }
-    .media {
-        border-top: 1px solid green;
-        border-left: 5px solid green;
-        border-right: 5px solid green;
-        padding-top: 10px;
-        list-style: none;
-    }
+
+.newslist {
+    display:flex;
+    justify-content:space-around;
+}
+.media-object {
+    width: 300px;
+    padding: 5px;
+}
+.media {
+    border-top: 1px solid green;
+    border-left: 5px solid green;
+    border-right: 5px solid green;
+    padding-top: 10px;
+    list-style: none;
+}
 </style>
