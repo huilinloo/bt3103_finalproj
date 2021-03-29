@@ -15,5 +15,5 @@ export default[
     { path: '/newsroom', component:Newsroom},
     { path: '/past', component:PastTransactions},
     { path: '/help', component:Help},
-    { path: '/logout', componet:Logout}   
+    { path: '/logout', componet:Logout}
 ]

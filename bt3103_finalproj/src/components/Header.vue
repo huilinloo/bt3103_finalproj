@@ -41,17 +41,26 @@ ul {
   flex-wrap: wrap;
   list-style-type: none;
   padding: 0;
+  width:100%;
+  height:100px;
 }
 li {
   flex-grow: 1;
-  flex-basis: 300px;
+  flex-basis: 150px;
   text-align: center;
   padding: 10px;
-  border: 1px solid #222;
   margin: 10px;
+  color: black;
+  font-size: 30px;
+}
+a {
+  color: black;
+  text-decoration: none;
+  font-weight:bold;
+
 }
 img {
-    height: 7%;
+    height: 100px;
     width: 7%;
 }
 </style>
