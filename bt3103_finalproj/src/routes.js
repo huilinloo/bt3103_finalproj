@@ -8,12 +8,12 @@ import History from './components/History.vue'
 import Help from './components/Help.vue'
 import Logout from './components/Logout.vue'
 export default[
-    { path: '/', component: Home},
-    { path: '/profile', component: Profile},
+    //{ path: '/', component: Home},
+    //{ path: '/profile', component: Profile},
     { path: '/leaderboard', component:Leaderboard},
-    { path: '/rewards', component:Rewards},
+    //{ path: '/rewards', component:Rewards},
     { path: '/newsroom', component:Newsroom},
     { path: '/history', component:History},
     { path: '/help', component:Help},
-    { path: '/logout', componet:Logout}
+    //{ path: '/logout', componet:Logout}
 ]
