@@ -2,7 +2,10 @@
   <div class="newslist">
       <div class="announcements">
           <h1> ANNOUNCEMENTS </h1>
-        <h2> announcements to be added here when an action is made </h2>
+          <div class="announement-body">
+        <h3> 31/03/2021  15:23</h3>
+        <h2> GreenSG just got a new look! Now you can see how you rank against other Singaporeans </h2>
+        </div>
     </div>
     <div class="container">
         <ul class="media-list">
@@ -52,7 +55,14 @@ export default {
 </script>
 
 <style scoped>
-
+.announcements {
+    width: 100%;
+}
+.announcement-body {
+    border-left: 5px solid green;
+    border-right: 5px solid green;
+    padding-top: 10px;
+}
 .newslist {
     display:flex;
     justify-content:space-around;
