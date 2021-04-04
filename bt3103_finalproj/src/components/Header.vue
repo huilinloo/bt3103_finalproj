@@ -18,7 +18,7 @@
         <router-link to="/newsroom" exact>Newsroom</router-link>
       </li>
       <li>
-        <router-link to="/past" exact>Past Transactions</router-link>
+        <router-link to="/history" exact>History</router-link>
       </li>
       <li>
         <router-link to="/help" exact>Help</router-link>
