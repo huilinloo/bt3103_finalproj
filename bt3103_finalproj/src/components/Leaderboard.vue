@@ -84,7 +84,7 @@ export default {
 
 <style scoped>
 h1 {
-    font-size: 100px;
+    font-size: 80px;
 }
 
 .sg {
@@ -124,7 +124,7 @@ h1 {
 #textfriends, #textsg {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     color: white;
-    font-size: 60px;
+    font-size: 50px;
     font-weight: 700;
     line-height: 26.4px;
 }
@@ -151,50 +151,53 @@ h1 {
     padding-top: 50px;
     padding-bottom: 50px;
     background-color: #3CB371;
-    
 }
 
 table {
-    //border-radius: 6px;
-    //margin-left: auto;
-    //margin-right: auto;
-    //width: 1200px;
-    //background: #90EE90;
     table-layout:fixed;
     width: 100%;
-    //border: 1px solid black;
-    font-size: 30px;
+    font-size: 25px;
+    border: none;
+    border-collapse: collapse;
 }
 
 th{
     padding-top: 10px;
     padding-bottom: 10px;
+    //background-color: #DEB887;
+    font-size: 30px;
 }
 
 td {
-    //padding-top: 20px;
-    //padding-bottom: 20px;
-    padding:10px 25px 10px 25px;
+    padding:40px 25px 10px 25px;
+}
+
+table tr:hover {
+    background-color: #ddd;
+}
+
+td:first-child, th:first-child {
+  border-radius: 10px 0 0 10px;
+}
+
+td:last-child, th:last-child {
+  border-radius: 0 10px 10px 0;
 }
 
 .position {
     color: #228B22;
 }
-/*
-// Gold
+
 tr:nth-child(2) {
-    background: gold;
+    border-radius: 10px;
+    background-color: gold;
 }
 
-//Silver
 tr:nth-child(3) {
-    background: #c0c0c0;
+    background-color: silver;
 }
 
-//Bronze
 tr:nth-child(4) {
-    background: #cd7f32;
+    background-color: #cd7f32;
 }
-
-*/
 </style>
