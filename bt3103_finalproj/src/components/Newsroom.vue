@@ -9,9 +9,9 @@
     </div>
     <div class="container">
         <ul class="media-list">
-            <li class="media" v-for="article in articles" v-bind:key=article>
+            <li class="media" v-for="article in articles" :key=article.url>
                 <div class="media-left">
-                    <a v-bind-href="article.url" target="_blank">
+                    <a v-bind:href="article.url" target="_blank">
                         <img class="media-object" v-bind:src="article.urlToImage">
                     </a>
                 </div>
@@ -55,6 +55,9 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+    text-decoration: underline;
+}
 .announcements {
     width: 100%;
 }
