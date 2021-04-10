@@ -43,6 +43,7 @@ ul {
   padding: 0;
   width:100%;
   height:100px;
+  background-color:#6bc7a4;
 }
 li {
   flex-grow: 1;
@@ -62,5 +63,9 @@ a {
 img {
     height: 100px;
     width: 7%;
+}
+.router-link-active{
+    color: white;
+    text-decoration: underline; 
 }
 </style>
