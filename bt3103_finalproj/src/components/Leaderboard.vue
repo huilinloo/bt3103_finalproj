@@ -24,7 +24,7 @@
                 </tr>
                 <tr v-for="(user, index) in sortArrays(sg)" :key = "index">
                     <td class = "position"><b>{{index+1}}</b></td>
-                    <td>{{user.name}}</td>
+                    <td>{{user.username}}</td>
                     <td>{{user.total_plastic}}</td>
                 </tr>
             </table>
@@ -39,7 +39,7 @@
                 </tr>
                 <tr v-for="(user, index) in sortArrays(friends)" :key = "index">
                     <td class = "position"><b>{{index+1}}</b></td>
-                    <td>{{user.name}}</td>
+                    <td>{{user.username}}</td>
                     <td>{{user.total_plastic}}</td>
                 </tr>
             </table>
@@ -54,26 +54,38 @@ export default {
     data() {
         return {
             sg: [],
-            friends: []
+            friends: [],
+            friends_username: []
         }
     },
     methods: {
         fetchData: function() {
-            database.collection('leaderboard').doc('qalKACH2NQF9vxhOrCDL').collection('friends').get().then(snapshot =>
-                snapshot.docs.forEach(doc => {
-                    var friend = doc.data()
-                    console.log(friend)
-                    this.friends.push(friend)
-                }));
-            database.collection('leaderboard').doc('qalKACH2NQF9vxhOrCDL').collection('singapore').get().then(snapshot => 
+            database.collection('users').doc('1').get().then(snapshot => {
+                this.friends_username = snapshot.data().list_friend;
+                //console.log(this.friends_username);
+                //console.log(this.friends_username.length);
+                //console.log(typeof this.friends_username);
+                for (var index in this.friends_username) {
+                    console.log(this.friends_username[index]);
+                    database.collection('users').where('username', '==', this.friends_username[index]).get().then(querySnapshot => {
+                        querySnapshot.forEach((doc) => {
+                            var plastic = doc.data().totalplastic;
+                            this.friends.push({username: doc.data().username, total_plastic: plastic});
+                    }) 
+                    });
+                }
+                });
+
+            database.collection('users').get().then(snapshot => {
                 snapshot.docs.forEach(doc => {
                     var user = doc.data()
                     console.log(user)
-                    this.sg.push(user)
-                }));
+                    this.sg.push({username: user.username, total_plastic: user.totalplastic})
+                })
+            });
         },
         sortArrays: function(arrays) {
-            return arrays.sort((a, b) => b.total_plastic - a.total_plastic);
+            return arrays.sort((a, b) => b.total_plastic - a.total_plastic).slice(0, 10);
         }
     },
     mounted() {
@@ -164,7 +176,6 @@ table {
 th{
     padding-top: 10px;
     padding-bottom: 10px;
-    //background-color: #DEB887;
     font-size: 30px;
 }
 
