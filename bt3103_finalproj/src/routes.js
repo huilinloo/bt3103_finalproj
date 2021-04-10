@@ -1,4 +1,5 @@
 //Step 2 -- Define Routes
+import Login from './components/Login.vue'
 import Home from './components/Home.vue'
 import Profile from './components/Profile.vue'
 import Leaderboard from './components/Leaderboard.vue'
@@ -7,8 +8,12 @@ import Newsroom from './components/Newsroom.vue'
 //import History from './components/History.vue'
 import Help from './components/Help.vue'
 //import Logout from './components/Logout.vue'
+import Signup from './components/Signup.vue'
+import Forgotpassword from './components/Forgot-password.vue'
+
 export default[
-    { path: '/', component: Home},
+    { path: '/', component: Login},
+    { path: '/home', component: Home},
     { path: '/profile', component: Profile},
     { path: '/leaderboard', component:Leaderboard},
     { path: '/rewards', component:Rewards},
@@ -16,4 +21,6 @@ export default[
     //{ path: '/history', component:History},
     { path: '/help', component:Help},
     //{ path: '/logout', componet:Logout}
+    { path: '/signup', component:Signup},
+    { path: '/forgot-password', component:Forgotpassword}
 ]
