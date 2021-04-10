@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li>
-        <router-link to="/" exact>Home</router-link>
+        <router-link to="/home" exact>Home</router-link>
       </li>
       <li>
         <router-link to="/profile" exact>Profile</router-link>
@@ -13,12 +13,14 @@
       <li>
         <router-link to="/rewards" exact>Rewards</router-link>
       </li>
-      <img src = "../assets/logo.png" alt = "not found"/>
+        <router-link to="/" exact>
+        <img src = "../assets/logo.png" style="width:200px" alt = "not found"/>
+        </router-link>
       <li>
         <router-link to="/newsroom" exact>Newsroom</router-link>
       </li>
       <li>
-        <router-link to="/past" exact>Past Transactions</router-link>
+        <router-link to="/history" exact>History</router-link>
       </li>
       <li>
         <router-link to="/help" exact>Help</router-link>
@@ -35,6 +37,7 @@ export default {
 
 }
 </script>
+
 <style scoped>
 ul {
   display: flex;
