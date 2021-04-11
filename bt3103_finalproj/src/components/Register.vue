@@ -92,23 +92,23 @@ export default {
                 .then((userCredential) => {
                 // Signed in 
                 var user = userCredential.user;
-                var uid = user.uid
+                var uid = user.uid;
                 //add to users collection
-                firebase.database().collection('users').doc(uid).set({
+                firebase.firestore().collection("users").doc(uid).set({
                   //DOB: this.dob,
                   email: this.form.email,
                   friends: 0,
                   password: this.form.password,
                   //phone: this.phone_no,
                   points: 0,
-                  //startdate: this.startdate,
+                  startdate: this.startdate,
                   thisweek: 0,
                   totalplastic: 0,
-                  username: this.form.username,
+                  username: this.form.name,
                   weeklygoal: 0
                 });
                 alert("Successfully signed up! Please login.")
-                this.$router.push('/home');
+                this.$router.push('/');
               })
               .catch((error) => {
                 var errorCode = error.code;
