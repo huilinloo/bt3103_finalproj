@@ -29,7 +29,7 @@ import linechart from '../linechart_home.js'
 
 export default{
     components:{
-        'line-chart':linechart,
+        'line-chart':linechart
     },
   
   data(){
