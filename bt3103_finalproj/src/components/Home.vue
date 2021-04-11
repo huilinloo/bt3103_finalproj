@@ -1,5 +1,6 @@
 <template>
     <div id="welcome">
+        {{"userID is " + userID}}
         <h1>{{'Welcome back, ' + home[0].name + '!'}}</h1> <br>
         <div id="chart">
             <line-chart :height="200"> </line-chart>
@@ -31,21 +32,24 @@ export default{
     components:{
         'line-chart':linechart
     },
-  
-  data(){
-    return{
-        home: []
+    props: {
+        userID: String
+    },
+    data(){
+        return{
+            home: []
         }
-  },
-  methods:{
-    fetchItems:function(){
-      database.collection('home').get().then((querySnapShot)=>{
-        let item={}
-        querySnapShot.forEach(doc=>{
-            item=doc.data()
-            item.id=doc.id
-            this.home.push(item) 
-            })      })    
+    },
+    methods:{
+        fetchItems:function(){
+            database.collection('home').get().then((querySnapShot)=>{
+                let item={}
+                querySnapShot.forEach(doc=>{
+                    item=doc.data()
+                    item.id=doc.id
+                    this.home.push(item) 
+                })      
+            })    
         },   
     },
   created(){

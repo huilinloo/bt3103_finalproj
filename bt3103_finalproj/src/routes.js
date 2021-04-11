@@ -13,10 +13,6 @@ import Forgotpassword from './components/Forgot-password.vue'
 import Merchantlogin from './components/Merchant-login.vue'
 import Merchantinputs from './components/Merchant-inputs.vue'
 
-//try
-import Register from './components/Register.vue'
-import Login2 from './components/Login2.vue'
-
 export default[
     { path: '/', component: Login},
     { path: '/home', component: Home},
@@ -31,6 +27,4 @@ export default[
     { path: '/forgot-password', component:Forgotpassword},
     { path: '/merchant-login', component:Merchantlogin},
     { path: '/merchant-inputs', component:Merchantinputs},
-    { path: '/register', component:Register},
-    { path: '/login2', component:Login2},
 ]
