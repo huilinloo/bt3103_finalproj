@@ -1,7 +1,7 @@
 <template>
 <div id="app">
   <img src="https://i.postimg.cc/4xwY4sR5/wolrd-environmental-day-copy-2.jpg" align="left">
-    <form action="/action_page.php">
+    <form action="#" @submit.prevent="submit">
 	<div class="input_container">
         <h3><Strong>Add Customer Points</Strong></h3><br>
         <label for="phone">Phone Number: </label><br>

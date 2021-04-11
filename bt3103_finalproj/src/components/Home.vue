@@ -34,6 +34,9 @@ export default{
     components:{
         'line-chart':linechart
     },
+    props: {
+        userID: String
+    },
     data : function(){
     return{
         home: [],
