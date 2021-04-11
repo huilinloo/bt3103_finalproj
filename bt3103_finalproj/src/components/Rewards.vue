@@ -4,40 +4,41 @@
             <h2>You have </h2>
             <b id = "num_pts">{{this.points}}</b><span id = "pts">Pts</span>
         </div>
+        <br>
         <br><br>
         <div id="reward-types">
         <ul>
-            <li v-for="reward in rewards" :key="reward.name">
+            <li v-for="(reward, idx) in rewards" :key="reward.name">
                 <img v-bind:src="reward.url">
                 <h3>{{reward.name}}</h3> 
                 <h4>{{reward.value}} points</h4><br>
-                <button id="redeem" v-on:click="clicked">Redeem Pts</button>
+                <button id="redeem" v-bind:reward="idx" v-on:click="clicked(idx)">Redeem Pts</button>
             </li>
         </ul>
-        <!--<div class = "featured">
-            <h3>Featured Rewards</h3>
-        </div>-->
         </div>
     </div>
 </template>
 <script>
 import database from '../firebase.js'
+import firebase from 'firebase/app'
 export default {
     data() {
         return {
             points: 0,
             rewards:[
-                {name: "Gong Cha $5 voucher", value: 500, url:"http://www.gong-cha-sg.com/wp-content/uploads/2017/11/1.png"},
+                {name: "Gong Cha $3 voucher", value: 500, url:"http://www.gong-cha-sg.com/wp-content/uploads/2017/11/1.png"},
                 {name: "Seastainable Straw Set", value:500, url:"https://cdn.shopify.com/s/files/1/2505/0888/products/straw-silver_b6f94502-7a86-4ee9-8a62-04ec20208ce5_2048x.png?v=1563447283"},
-                {name: "FairPrice $5 voucher", value: 500, url:"https://oroinc.com/b2b-ecommerce/wp-content/uploads/sites/3/2019/07/fairprice-1500x1500-1.png"}
+                {name: "FairPrice $5 voucher", value: 1000, url:"https://oroinc.com/b2b-ecommerce/wp-content/uploads/sites/3/2019/07/fairprice-1500x1500-1.png"}
             ]
         }
     },
     methods: {
-    clicked: function() {
-        if (this.points >= 500) {
+    clicked: function(index) {
+        var reward = this.rewards[index];
+        if (this.points >= reward.value) {
         alert("Redeemption successful. Take a photo of this page and show to the respective merchant");
-        var updatedPoints = this.points - 500;
+        var updatedPoints = this.points - reward.value;
+        database.collection('users').doc('1').update({redeemed: firebase.firestore.FieldValue.arrayUnion(reward.name)})
         database.collection('users').doc('1').update({
             points: updatedPoints
         }).then(() => location.reload());
