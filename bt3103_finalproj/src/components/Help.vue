@@ -2,13 +2,12 @@
 <div id="help">
     <h1>FAQs</h1>
     <h2 id="question 1">
-        How do I update my profile?<br>
+        When can we see more rewards?<br>
     </h2>
     <p id="answer 1">
-        Please follow the instructions below:<br>
-        a) Tap on "Profile" on the menu bar of the website.<br>
-        b) Tap "Edit my profile" at the top of the page.<br>
-        c) Click "Save profile" after making the necessary changes.<br>
+        We are constantly seeking out for more merchants to sponsor us<br>
+        Do look out for future updates!<br>
+        If you are a merchant and wish to contribute to rewards, please email us at sponsors@greensg.com<br>
     </p>
     <h2 id="question 2">
         How do I redeem the points I have accumulated?<br>
