@@ -7,19 +7,18 @@
         </div>
         <div id="bar">
             <h1 id="thisweek">This Week </h1>
-            <p1 id="h">How much you saved this week </p1>
         </div>
         <div id="pie1">
             <doughnut-chart :height="230"></doughnut-chart>
         </div>
         <div id="lifetime">
-            <h1 id="l">Lifetime Statistics</h1> <br><br>
+            <h1 id="l">Lifetime Statistics</h1> <br>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqrsTh0P06Y5o3PSd-4PKbuo-eS-ttZAtp8Us6brIytrxhq4WD15hlZzOOqD8vk7W6HmE&usqp=CAU" id="img2">
             <h1> {{user[0].friends + ' FRIENDS'}} </h1>
         </div>
         <div id="plastic">
             <img src="https://image.flaticon.com/icons/png/512/2639/2639818.png" id="img1">
-            <h1> {{user[0].totalplastic + ' G PLASTIC SAVED'}}</h1>
+            <h1> {{user[0].totalplastic + 'G PLASTIC SAVED'}}</h1>
         </div>
     </div>
 </template>
