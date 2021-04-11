@@ -10,6 +10,12 @@ import Help from './components/Help.vue'
 //import Logout from './components/Logout.vue'
 import Signup from './components/Signup.vue'
 import Forgotpassword from './components/Forgot-password.vue'
+import Merchantlogin from './components/Merchant-login.vue'
+import Merchantinputs from './components/Merchant-inputs.vue'
+
+//try
+import Register from './components/Register.vue'
+import Login2 from './components/Login2.vue'
 
 export default[
     { path: '/', component: Login},
@@ -22,5 +28,9 @@ export default[
     { path: '/help', component:Help},
     //{ path: '/logout', componet:Logout}
     { path: '/signup', component:Signup},
-    { path: '/forgot-password', component:Forgotpassword}
+    { path: '/forgot-password', component:Forgotpassword},
+    { path: '/merchant-login', component:Merchantlogin},
+    { path: '/merchant-inputs', component:Merchantinputs},
+    { path: '/register', component:Register},
+    { path: '/login2', component:Login2},
 ]

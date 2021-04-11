@@ -2,24 +2,24 @@
     <div id="profile">
         <div id="user">
             <img src="https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg">
-            <h1> RYAN TAN </h1>
+            <h1> {{user[0].username}} </h1>
             <p1> {{'MEMBER SINCE '+user[0].startdate}} </p1>
         </div>
         <div id="bar">
-            <h1>This Week </h1>
-            <p1>How much you saved this week </p1>
+            <h1 id="thisweek">This Week </h1>
+            <p1 id="h">How much you saved this week </p1>
         </div>
         <div id="pie1">
             <doughnut-chart :height="230"></doughnut-chart>
         </div>
         <div id="lifetime">
-            <h1>Lifetime Statistics</h1> <br>
-            <img src="https://www.ymadvocacy.org/wp-content/uploads/2015/03/YMAP-ICONS-PEOPLE-01-300x300.png" id="img2">
+            <h1 id="l">Lifetime Statistics</h1> <br><br>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqrsTh0P06Y5o3PSd-4PKbuo-eS-ttZAtp8Us6brIytrxhq4WD15hlZzOOqD8vk7W6HmE&usqp=CAU" id="img2">
             <h1> {{user[0].friends + ' FRIENDS'}} </h1>
         </div>
         <div id="plastic">
             <img src="https://image.flaticon.com/icons/png/512/2639/2639818.png" id="img1">
-            <h1> {{user[0].totalplastic + 'G PLASTIC SAVED'}}</h1>
+            <h1> {{user[0].totalplastic + ' G PLASTIC SAVED'}}</h1>
         </div>
     </div>
 </template>
@@ -39,7 +39,7 @@ export default {
   },
   methods:{
     fetchItems:function(){
-      database.collection('profile').get().then((querySnapShot)=>{
+      database.collection('users').get().then((querySnapShot)=>{
         let item={}
         querySnapShot.forEach(doc=>{
             item=doc.data()
@@ -56,6 +56,9 @@ export default {
 
 </script>
 <style scoped>
+#thisweek,#l,#h {
+    text-align: left;
+}
 #user{
     height:200px;
     float:left;
@@ -100,8 +103,8 @@ export default {
     height: 280px;
 }
 #img2{
-    width: 260px;
-    height: 260px;
+    width: 280px;
+    height: 280px;
 }
 
 ul{

@@ -4,8 +4,8 @@
     <form action="/action_page.php">
 	<div class="input_container">
         <h3><Strong>Create Account</Strong></h3><br>
-        <label for="name">Name: </label><br>
-        <input type="text" id="name" class="form-control form-control-lg" name="name" required ><br>  
+        <label for="ursname">Username: </label><br>
+        <input type="text" id="ursname" class="form-control form-control-lg" name="ursname" required ><br>  
         <label for="dob">Date of Birth: </label><br>
         <input type="date" id="dob" class="form-control form-control-lg" name="dob" required><br>
         <label for="email">Email Address: </label><br>
