@@ -2,23 +2,57 @@
     <div id = "rewards">
         <div class = "pts_desc">
             <h2>You have </h2>
-            <b id = "num_pts">1000</b>   <span id = "pts">Pts</span>
+            <b id = "num_pts">{{this.points}}</b><span id = "pts">Pts</span>
         </div>
-        <br>
-        <button>Tap to see breakdown of Pts -> </button>
         <br><br>
-        <button id = "redeem">Redeem Pts </button>
+        <div id="reward-types">
+        <ul>
+            <li v-for="reward in rewards" :key="reward.name">
+                <img v-bind:src="reward.url">
+                <h3>{{reward.name}}</h3> 
+                <h4>{{reward.value}} points</h4><br>
+                <button id="redeem" v-on:click="clicked">Redeem Pts</button>
+            </li>
+        </ul>
         <!--<div class = "featured">
             <h3>Featured Rewards</h3>
         </div>-->
+        </div>
     </div>
 </template>
 <script>
+import database from '../firebase.js'
 export default {
     data() {
         return {
-
+            points: 0,
+            rewards:[
+                {name: "Gong Cha $5 voucher", value: 500, url:"http://www.gong-cha-sg.com/wp-content/uploads/2017/11/1.png"},
+                {name: "Seastainable Straw Set", value:500, url:"https://cdn.shopify.com/s/files/1/2505/0888/products/straw-silver_b6f94502-7a86-4ee9-8a62-04ec20208ce5_2048x.png?v=1563447283"},
+                {name: "FairPrice $5 voucher", value: 500, url:"https://oroinc.com/b2b-ecommerce/wp-content/uploads/sites/3/2019/07/fairprice-1500x1500-1.png"}
+            ]
         }
+    },
+    methods: {
+    clicked: function() {
+        if (this.points >= 500) {
+        alert("Redeemption successful. Take a photo of this page and show to the respective merchant");
+        var updatedPoints = this.points - 500;
+        database.collection('users').doc('1').update({
+            points: updatedPoints
+        }).then(() => location.reload());
+        } else{
+            alert("Redemption unsuccessful. Save more plastic!")
+        }
+    },
+    fetchData: function() {
+            database.collection('users').doc('1').get().then(snapshot => {
+                this.points = snapshot.data().points;
+                });
+    }
+    },
+    created() {
+        this.fetchData();
     }
 }
 </script>
@@ -51,7 +85,24 @@ h2 {
 #pts {
     font-size: 30px;
 }
-
+img {
+    max-height: 300px;
+    height: 70%;
+    width: auto;
+    border:black;
+}
+.reward-types {
+    display: table;
+    margin: 0 auto;
+}
+ul{
+    justify-content: center;
+    list-style-type: none;
+    display: flex;
+}
+li{
+    padding: 10px;
+}
 /*
 .featured {
     text-align: left;

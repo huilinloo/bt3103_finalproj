@@ -1,17 +1,20 @@
 <template>
   <div id="app">
     <app-header></app-header>
+    <app-navbar></app-navbar>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
+import Navbar from './components/Navbar.vue'
 
 export default {
   name: 'App',
   components: {
-    'app-header':Header
+    'app-header':Header,
+    'app-navbar':Navbar
   }
 }
 </script>
