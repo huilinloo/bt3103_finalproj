@@ -3,8 +3,18 @@
       <div class="announcements">
           <h1> ANNOUNCEMENTS </h1>
           <div class="announement-body">
+              <br>
         <h3> 31/03/2021  15:23</h3>
         <h2> GreenSG just got a new look! Now you can see how you rank against other Singaporeans </h2>
+        <br><br>
+        <h3> 15/03/2021  12:22</h3>
+        <h2> Minor bug fixes </h2>
+        <br><br>
+        <h3> 20/02/2021  11:23</h3>
+        <h2> We welcome Seastainable as our first sponsor. Now you can redeem Seastainable's metal straw set at only 500 points. </h2>
+        <br><br>
+        <h3> 29/01/2021  14:23</h3>
+        <h2> Welcome to GreenSG. GreenSG is the first of its kind, a challenge to reducee plastic waste.</h2>
         </div>
     </div>
     <div class="container">
