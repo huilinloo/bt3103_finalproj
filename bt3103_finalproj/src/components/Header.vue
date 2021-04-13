@@ -26,15 +26,28 @@
         <router-link to="/help" exact>Help</router-link>
       </li>
       <li>
-        <router-link to="/logout" exact>Log Out</router-link>
+        <a class="nav-link" @click.prevent="signOut">Sign out</a>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-export default {
+import firebase from "firebase";
 
+export default {
+  methods: {
+    signOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace({
+            path: "/"
+          });
+        });
+    }
+  }
 }
 </script>
 

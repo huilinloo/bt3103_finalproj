@@ -34,14 +34,11 @@ export default{
     components:{
         'line-chart':linechart
     },
-    props: {
-        userID: String
-    },
     data : function(){
-    return{
+        return{
         home: [],
         totalPlastic:0,
-        totalTarget:0
+        totalTarget:0,
         }
     },
     methods:{
@@ -69,6 +66,9 @@ export default{
     },
     created(){
         this.fetchItems()
+    },
+    mounted() {
+        console.log(this.$store.state.user.id);
     }
 }
 </script>

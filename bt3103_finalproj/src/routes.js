@@ -14,17 +14,17 @@ import Merchantlogin from './components/Merchant-login.vue'
 import Merchantinputs from './components/Merchant-inputs.vue'
 
 export default[
-    { path: '/', component: Login},
-    { path: '/home', component: Home},
-    { path: '/profile', component: Profile},
-    { path: '/leaderboard', component:Leaderboard},
-    { path: '/rewards', component:Rewards},
-    { path: '/newsroom', component:Newsroom},
-    { path: '/history', component:History},
-    { path: '/help', component:Help},
-    //{ path: '/logout', componet:Logout}
-    { path: '/signup', component:Signup},
-    { path: '/forgot-password', component:Forgotpassword},
-    { path: '/merchant-login', component:Merchantlogin},
-    { path: '/merchant-inputs', component:Merchantinputs},
+    { path: '/', component: Login, props: true},
+    { path: '/home', component: Home, props: true},
+    { path: '/profile', component: Profile, props: true},
+    { path: '/leaderboard', component:Leaderboard, props: true},
+    { path: '/rewards', component:Rewards, props: true},
+    { path: '/newsroom', component:Newsroom, props: true},
+    { path: '/history', component:History, props: true},
+    { path: '/help', component:Help, props: true},
+    //{ path: '/logout', componet:Logout, props: true}
+    { path: '/signup', component:Signup, props: true},
+    { path: '/forgot-password', component:Forgotpassword, props: true},
+    { path: '/merchant-login', component:Merchantlogin, props: true},
+    { path: '/merchant-inputs', component:Merchantinputs, props: true},
 ]

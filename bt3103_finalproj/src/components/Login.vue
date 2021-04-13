@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <img src="https://i.postimg.cc/3x2ksmnP/forest-bathing.jpg">
-    <Home v-bind:userID = "userID"></Home>
         <div class="login">
           <h3><Strong>Login</Strong></h3><br>
+          {{"userid is " + this.userID}}
             <div v-if="error" class="alert alert-danger">{{error}}</div>
             <form action="#" @submit.prevent="submit">
                 <label for="email">Email Address</label>
@@ -50,7 +50,6 @@
 
 <script>
 import firebase from "firebase";
-import Home from "./Home";
 
 export default {
   data() {
@@ -63,18 +62,19 @@ export default {
       userID: "happy"
     };
   },
-  components: {
-    Home
-  },
   methods: {
     submit() {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.form.email, this.form.password)
         .then((userCredential)  => {
-          this.$router.push("home");
           var user = userCredential.user;
           this.userID = user.uid;
+          this.$router.push({
+            path: "/home",
+            params: {
+              userID: 'this.userID'
+            }});
         })
         .catch(err => {
           this.error = err.message;
