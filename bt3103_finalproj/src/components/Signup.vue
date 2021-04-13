@@ -132,7 +132,7 @@ export default {
                   weeklygoal: 0
                 });
                 alert("Successfully signed up! Please login.")
-                this.$router.push('/');
+                this.$router.push('/login');
               })
               .catch((error) => {
                 var errorCode = error.code;
