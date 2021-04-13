@@ -39,8 +39,9 @@ export default {
     height: 1000px;
     margin: 20px;
     position: fixed;
-    margin-top: 100px;
-    margin-left: 200px;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-bottom: 50px;
 }
 
 button {
