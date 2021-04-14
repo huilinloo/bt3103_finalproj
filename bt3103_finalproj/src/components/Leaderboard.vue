@@ -5,6 +5,7 @@
             <div class = "header__text">
                 <h1> Leaderboard </h1>
                 <p><i> Save more plastic to climb up the leaderboard! </i></p>
+                {{this.userid}}
                 <!--<p>#BYO #ZeroWasteNation </p>-->
             </div>
         </div>
@@ -49,13 +50,15 @@
 
 <script>
 import database from '../firebase.js'
+import firebase from "firebase";
 
 export default {
     data() {
         return {
             sg: [],
             friends: [],
-            friends_username: []
+            friends_username: [],
+            userid: ""
         }
     },
     methods: {
@@ -83,6 +86,7 @@ export default {
                     this.sg.push({username: user.username, total_plastic: user.totalplastic})
                 })
             });
+            this.userid = firebase.auth().currentUser.uid;
         },
         sortArrays: function(arrays) {
             return arrays.sort((a, b) => b.total_plastic - a.total_plastic).slice(0, 10);

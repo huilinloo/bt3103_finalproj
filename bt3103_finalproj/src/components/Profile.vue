@@ -2,6 +2,7 @@
     <div id="profile">
         <div id="user">
             <img src="https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg">
+            {{"userid is " + this.userid}}
             <h1> {{user[0].username}} </h1>
             <p1> {{'MEMBER SINCE '+user[0].startdate}} </p1>
         </div>
@@ -26,6 +27,8 @@
 <script>
 import doughnut from '../profile_doughnut.js'
 import database from '../firebase.js'
+import firebase from "firebase"
+
 export default {
     components:{
         'doughnut-chart':doughnut
@@ -33,7 +36,8 @@ export default {
   
   data(){
     return{
-        user: []
+        user: [],
+        userid: ""
         }
   },
   methods:{
@@ -44,7 +48,8 @@ export default {
             item=doc.data()
             item.id=doc.id
             this.user.push(item) 
-            })      })    
+            })      })
+            this.userid = firebase.auth().currentUser.uid;    
         },   
     },
   created(){

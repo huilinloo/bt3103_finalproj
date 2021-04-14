@@ -23,8 +23,9 @@ export default[
     { path: '/history', component:History},
     { path: '/help', component:Help},
     { path: '/login', component:Login},
+    //{ path: '/logout', componet:Logout, props: true}
     { path: '/signup', component:Signup},
     { path: '/forgot-password', component:Forgotpassword},
     { path: '/merchant-login', component:Merchantlogin},
-    { path: '/merchant-inputs', component:Merchantinputs},
+    { path: '/merchant-inputs', component:Merchantinputs}
 ]

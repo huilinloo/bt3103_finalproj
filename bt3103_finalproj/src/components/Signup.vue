@@ -176,6 +176,7 @@ html, body {
 img {
   padding-left: 200px;
   height: 800px;
+  padding-top: 100px
 }
 
 body {
