@@ -1,7 +1,7 @@
 <template>
 <div id="app">
   <img src="https://i.postimg.cc/4xwY4sR5/wolrd-environmental-day-copy-2.jpg" align="left">
-    <form action="/action_page.php">
+    <form ref= "anyName" action="#" @submit.prevent="addPoints">
 	<div class="input_container">
         <h3><Strong>Add Customer Points</Strong></h3><br>
         <label for="phone">Phone Number: </label><br>
@@ -9,9 +9,33 @@
         <p v-if="phone != ''">{{"Username is " + this.username}}</p>
         <br><br>
         <label for="points">Points Earned: </label><br>
-        <input type="points" class="form-control form-control-lg" v-model="points" v-on:click="checkPhone()" required/>
+        <input type="number" class="form-control form-control-lg" v-model.number="new_points" v-on:click="checkPhone()" required/>
         <br>
 
+        <p id = "allocation"><b>Information on points allocation</b></p>
+        <table id = "info">
+          <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Amount of Points</th>
+          </tr>
+          <tr>
+            <td>Straw</td>
+            <td>1</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td>Plastic Bag</td>
+            <td>1</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>Plastic Container</td>
+            <td>1</td>
+            <td>20</td>
+          </tr>
+        </table>
+        <br>
         <button type="submit" class="btn btn-success btn-lg btn-block" v-on:click="addPoints()">Submit</button>
         <br>
   </div>
@@ -29,8 +53,10 @@ export default {
             users: [],
             username: '',
             sameNumber: false,
-            points: 0,
-            id: ""
+            new_points: 0,
+            id: "",
+            curr_points: null,
+            curr_plastic: null
         }
     },
     methods:{
@@ -40,7 +66,7 @@ export default {
             querySnapShot.forEach(doc=>{
               item=doc.data()
               item.id=doc.id
-              this.users.push([item.id,item]) 
+              this.users.push([item.id,item])
             })      
           })    
         },   
@@ -52,6 +78,11 @@ export default {
                 this.sameNumber = true
                 this.username = user[1].username
                 this.id = user[0]
+                //console.log(this.id)
+                this.curr_points = user[1].points
+                this.curr_plastic = user[1].totalplastic
+                //console.log(this.curr_points)
+                //console.log(typeof this.curr_points)
             }
           }
           if (this.sameNumber == false) {
@@ -61,11 +92,22 @@ export default {
         addPoints: function() {
             if (this.sameNumber == false) {
                 alert("Invalid phone number!");
-                this.$router.push('merchant-inputs') //why cannot?
+                this.$router.push('/merchant-inputs') //why cannot?
             } else {
-                database.collection('users').doc(1).update({
-                    username: "anqier98"
+                //straw: 5g, 5 points
+                //plastic bag: 10g, 10 points
+                //plastic container: 20g, 20 points
+                var updated_points = this.curr_points + this.new_points
+                //console.log(this.new_points)
+                //console.log(typeof updated_points)
+                database.collection("users").doc(this.id).update({
+                    points: updated_points,
+                    totalplastic: this.curr_plastic + this.new_points
                 });
+                alert("Successfully added points!");
+                this.username = '';
+                this.new_points = 0;
+                this.$refs.anyName.reset();
             }
         }
     },
@@ -177,4 +219,19 @@ input[type=submit] {
   font-size: 18px;
 }
 
+#info {
+    width: 100%;
+    font-size: 15px;
+    border: none;
+    border-collapse: collapse;
+}
+
+th {
+  text-align:center;
+}
+
+#allocation {
+  color: red;
+  text-decoration: underline;
+}
 </style>

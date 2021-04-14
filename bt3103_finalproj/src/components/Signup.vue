@@ -1,77 +1,163 @@
 <template>
-<div id="app">
-  <img src="https://i.postimg.cc/4xwY4sR5/wolrd-environmental-day-copy-2.jpg" align="left">
-    <form action="/action_page.php">
-	<div class="input_container">
+  <div id="app">
+    <img src="https://i.postimg.cc/4xwY4sR5/wolrd-environmental-day-copy-2.jpg" align="left">
+    <div v-if="error" class="alert alert-danger">{{error}}</div>
+    <form action="#" @submit.prevent="submit">
+      <div class="input_container">
         <h3><Strong>Create Account</Strong></h3><br>
-        <label for="ursname">Username: </label><br>
-        <input type="text" id="ursname" class="form-control form-control-lg" name="ursname" required ><br>  
-        <label for="dob">Date of Birth: </label><br>
-        <input type="date" id="dob" class="form-control form-control-lg" name="dob" required><br>
-        <label for="email">Email Address: </label><br>
-        <input type="email" id="email" class="form-control form-control-lg" name="email" required><br> 
-        <label for="phone">Phone Number: </label><br>
-        <input type="text" id="phone" class="form-control form-control-lg" name="phone" required><br>   
-        <label for="psw">Password: </label><br>
-        <input type="password" class="form-control form-control-lg" @input="checkPassword" v-model="password" v-on:click="displayMsg()" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
-        <br>
+        <label for="name">Username:</label>
 
-		<ul>
-			<li v-bind:class="{ is_valid: contains_eight_characters }">8 Characters</li>
-			<li v-bind:class="{ is_valid: contains_number }">Contains Number</li>
-			<li v-bind:class="{ is_valid: contains_uppercase }">Contains Uppercase</li>
-			<li v-bind:class="{ is_valid: contains_special_character }">Contains Special Character</li>
-		</ul>
+          <input id="name"
+            type="name"
+            class="form-control form-control-lg"
+            name="name"
+            required
+            v-model="form.name"
+          />
 
-		<div class="checkmark_container" v-bind:class="{ show_checkmark: valid_password }">		
-			<svg width="50%" height="50%" viewBox="0 0 140 100">
-				<path class="checkmark" v-bind:class="{ checked: valid_password }" d="M10,50 l25,40 l95,-70" />
-			</svg>
-		</div>	
-        <button type="submit" class="btn btn-success btn-lg btn-block" @click="$router.push('/')">Sign Up</button>
-        <br>
-  </div>
+          <label for="email">Email Address:</label>
+          <input
+            id="email"
+            type="email"
+            class="form-control form-control-lg"
+            name="email"
+            required
+            v-model="form.email"
+          />
+
+          <label for="phone">Phone Number: </label><br>
+          <input id="phone" 
+            type="text" 
+            class="form-control form-control-lg" 
+            name="phone" 
+            v-model="form.phone"
+            required>
+
+          <label for="password">Password</label>
+          <input id="password"
+            type="password"
+            class="form-control form-control-lg"
+            name="password"
+            @input="checkPassword"
+            required
+            v-model="password" 
+            v-on:click="displayMsg()" 
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+          />
+          <br>
+
+          <ul>
+            <li v-bind:class="{ is_valid: contains_eight_characters }">8 Characters</li>
+            <li v-bind:class="{ is_valid: contains_number }">Contains Number</li>
+            <li v-bind:class="{ is_valid: contains_uppercase }">Contains Uppercase</li>
+            <li v-bind:class="{ is_valid: contains_special_character }">Contains Special Character</li>
+          </ul>  
+          
+          <div class="checkmark_container" v-bind:class="{ show_checkmark: valid_password }">		
+            <svg width="50%" height="50%" viewBox="0 0 140 100">
+              <path class="checkmark" v-bind:class="{ checked: valid_password }" d="M10,50 l25,40 l95,-70" />
+              </svg>
+          </div>	
+                
+          <button type="submit" class="btn btn-success btn-lg btn-block">Sign Up</button>
+
+      </div>
     </form>
-</div>
+  </div>
 </template>
 
+
 <script>
+import firebase from "firebase";
+
 export default {
-    data(){
-        return{
-            password: null,
-            password_length: 0,
-            contains_eight_characters: false,
-            contains_number: false,
-            contains_uppercase: false,
-            contains_special_character: false,
-            valid_password: false
+  data() {
+    return {
+      form: {
+        name: "",
+        email: "",
+        phone:"",
+      },
+      error: null,
+      password: "",
+      password_length: 0,
+      contains_eight_characters: false,
+      contains_number: false,
+      contains_uppercase: false,
+      contains_special_character: false,
+      valid_password: false
+    };
+  },
+  methods: {
+    checkPassword() {
+      this.password_length = this.password.length;
+      //eslint-disable-next-line
+      const format = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+      if (this.password_length > 8) {
+        this.contains_eight_characters = true;
+      } else {
+        this.contains_eight_characters = false;
+			}
+      this.contains_number = /\d/.test(this.password);
+      this.contains_uppercase = /[A-Z]/.test(this.password);
+			this.contains_special_character = format.test(this.password); 
+      if (this.contains_eight_characters === true &&
+        this.contains_special_character === true &&
+        this.contains_uppercase === true && this.contains_number === true) {
+          this.valid_password = true;			
+      } else {
+        this.valid_password = false;
+      }
+    },
+    submit() {
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(this.form.email, this.password)
+                .then((userCredential) => {
+                // Signed in 
+                var user = userCredential.user;
+                var uid = user.uid;
+                //add to users collection
+                firebase.firestore().collection("users").doc(uid).set({
+                  email: this.form.email,
+                  friends: 0,
+                  password: this.password,
+                  phone: this.form.phone,
+                  points: 0,
+                  startdate: this.startdate,
+                  thisweek: 0,
+                  totalplastic: 0,
+                  username: this.form.name,
+                  weeklygoal: 0
+                });
+                alert("Successfully signed up! Please login.")
+                this.$router.push('/login');
+              })
+              .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                if (errorCode == 'auth/weak-password') {
+                  alert('The password is too weak.');
+                } else {
+                  alert(errorMessage);
+                }
+                console.log(error);
+            });
+        },
+
+        getStartDate: function() {
+          var today = new Date();
+          var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+          this.startdate = date;
         }
     },
-    methods:{
-        checkPassword() {
-            this.password_length = this.password.length;
-            //eslint-disable-next-line
-            const format = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
-            if (this.password_length > 8) {
-                this.contains_eight_characters = true;
-            } else {
-                this.contains_eight_characters = false;
-			}
-            this.contains_number = /\d/.test(this.password);
-            this.contains_uppercase = /[A-Z]/.test(this.password);
-			this.contains_special_character = format.test(this.password); 
-            if (this.contains_eight_characters === true &&
-                this.contains_special_character === true &&
-                this.contains_uppercase === true && this.contains_number === true) {
-                    this.valid_password = true;			
-            } else {
-                this.valid_password = false;
-            }
-        }
+    mounted() {
+      this.getStartDate()
     }
-}
+};
 </script>
+
 
 <style scoped>
 /* Basic Config --------- */

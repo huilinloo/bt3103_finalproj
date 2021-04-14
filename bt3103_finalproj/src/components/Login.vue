@@ -1,26 +1,36 @@
 <template>
-  <div>
+  <div class="container">
     <img src="https://i.postimg.cc/3x2ksmnP/forest-bathing.jpg">
-      <div class="login">
-          <div v-if="error" class="alert alert-danger">{{error}}</div>
-          <form action="#" @submit.prevent="submit">
-              <h3><Strong>LOGIN</Strong></h3><br>
-
-              <div class="form-group">
-                  <label>Email Address</label>
-                  <input id="email" type="email" class="form-control form-control-lg" name="email" value required autofocus v-model="email"/>
-              </div>
-
-              <div class="form-group">
-                  <label>Password</label>
-                  <input id="password" type="password" class="form-control form-control-lg" name="password" required v-model="password"/>
-              </div>
-
-              <button type="submit" class="btn btn-dark btn-lg btn-block">Sign In</button>
-
-              <p class="forgot-password text-right mt-2 mb-4">
-                  <router-link to="/forgot-password">Forgot password ?</router-link>
-              </p>
+    <Home v-bind:userID = "userID"></Home>
+        <div class="login">
+          <h3><Strong>Login</Strong></h3><br>
+            <div v-if="error" class="alert alert-danger">{{error}}</div>
+            <form action="#" @submit.prevent="submit">
+                <label for="email">Email Address</label>
+                <input 
+                    id="email"
+                    type="email"
+                    class="form-control form-control-lg"
+                    name="email"
+                    value
+                    required
+                    autofocus
+                    v-model="form.email"
+                />
+                <label for="password">Password</label>
+                  <input
+                    id="password"
+                    type="password"
+                    class="form-control form-control-lg"
+                    name="password"
+                    required
+                    v-model="form.password"
+                  />
+                
+                <button type="submit" class="btn btn-dark btn-lg btn-block">Sign In</button>
+                <p class="forgot-password text-right mt-2 mb-4">
+                    <router-link to="/forgot-password">Forgot password ?</router-link>
+                </p>
 
               <p class="signup">
                   <router-link to="/signup">Don't have an account yet? Join us today!</router-link>
@@ -33,68 +43,45 @@
                       <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                   </ul>
               </div>
-
-          </form>
-      </div>
+            </form>
+        </div>
   </div>
 </template>
 
 <script>
-import database from '../firebase.js'
 import firebase from "firebase";
+import Home from "./Home";
 
-  export default {
-      data() {
-          return {
-            email:"",
-            password:"",
-            authenticated: false,
-            users: [],
-            error: null
-          }
+export default {
+  data() {
+    return {
+      form: {
+        email: "",
+        password: ""
       },
-      methods: {
-        fetchItem:function(){
-          database.collection('users').get().then((querySnapShot)=>{
-            let item={}
-            querySnapShot.forEach(doc=>{
-              item=doc.data()
-              item.id=doc.id
-              this.users.push(item) 
-            })      
-          })    
-        },   
-        checkPassword: function() {
-          for (var i = 0; i < this.users.length; i++) {
-            var user = this.users[i];
-            if (user.email == this.email && user.password == this.password) {
-              this.authenticated = true;
-            }
-          }
-
-          if (this.authenticated == true) {
-            this.$router.push('home')
-          } else {
-            alert("Invalid credentials entered!")
-          }
-        },
-        submit() {
-          firebase
-          .auth()
-          .signInWithEmailAndPassword(this.form.email, this.form.password)
-          .then(data => {
-          this.$router.replace({ name: "Dashboard" });
-          console.log(data);
+      error: null,
+      userID: "happy"
+    };
+  },
+  components: {
+    Home
+  },
+  methods: {
+    submit() {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.form.email, this.form.password)
+        .then((userCredential)  => {
+          this.$router.push("home");
+          var user = userCredential.user;
+          this.userID = user.uid;
         })
         .catch(err => {
           this.error = err.message;
         });
     }
-    },
-    created() {
-        this.fetchItem()
-    } 
   }
+};
 </script>
 
 <style scoped>
