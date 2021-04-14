@@ -30,13 +30,9 @@
 <script>
 import database from '../firebase.js'
 import linechart from '../linechart_home.js'
+import firebase from "firebase";
 
 export default {
-    props: {
-        userid: {
-            type:String
-        }
-    },
     components:{
         'line-chart':linechart
     },
@@ -44,7 +40,8 @@ export default {
         return{
         home: [],
         totalPlastic: 0,
-        totalTarget: 0
+        totalTarget: 0,
+        userd: ""
         }
     },
     methods:{
@@ -55,7 +52,8 @@ export default {
                     item=doc.data()
             item.id=doc.id
             this.home.push(item) 
-            }) })    
+            }) })
+            this.userid = firebase.auth().currentUser.uid;    
     },   
     findTotalPlastic: function() {
         this.totalPlastic=0
@@ -72,9 +70,6 @@ export default {
     },
     created(){
         this.fetchItems()
-        this.userid = String(this.$route.query.userid)
-        localStorage.setItem('userid', this.userid);
-        this.userid = localStorage.getItem('userid')
     }
 }
 </script>

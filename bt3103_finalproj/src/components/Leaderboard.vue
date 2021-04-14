@@ -50,18 +50,15 @@
 
 <script>
 import database from '../firebase.js'
+import firebase from "firebase";
 
 export default {
-    props: {
-        userid: {
-            type:String
-        }
-    },
     data() {
         return {
             sg: [],
             friends: [],
-            friends_username: []
+            friends_username: [],
+            userid: ""
         }
     },
     methods: {
@@ -89,6 +86,7 @@ export default {
                     this.sg.push({username: user.username, total_plastic: user.totalplastic})
                 })
             });
+            this.userid = firebase.auth().currentUser.uid;
         },
         sortArrays: function(arrays) {
             return arrays.sort((a, b) => b.total_plastic - a.total_plastic).slice(0, 10);

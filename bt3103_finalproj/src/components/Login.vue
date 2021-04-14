@@ -74,11 +74,16 @@ export default {
           this.userid = user.uid;
           alert(this.userid)
           this.$router.push({
-            name: 'home', query: {userid: this.userid}
+            path: '/home'
           });
         })
         .catch(err => {
           this.error = err.message;
+        })
+        .onAuthStateChanged((user) => {
+          if (user) {
+            console.log(user.uid);
+          }
         });
     }
   }
