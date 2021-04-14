@@ -5,6 +5,7 @@
             <div class = "header__text">
                 <h1> Leaderboard </h1>
                 <p><i> Save more plastic to climb up the leaderboard! </i></p>
+                {{this.userid}}
                 <!--<p>#BYO #ZeroWasteNation </p>-->
             </div>
         </div>
@@ -51,6 +52,11 @@
 import database from '../firebase.js'
 
 export default {
+    props: {
+        userid: {
+            type:String
+        }
+    },
     data() {
         return {
             sg: [],

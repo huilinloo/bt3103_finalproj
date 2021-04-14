@@ -3,7 +3,9 @@
     <img src="https://i.postimg.cc/3x2ksmnP/forest-bathing.jpg">
         <div class="login">
           <h3><Strong>Login</Strong></h3><br>
-          {{"userid is " + this.userID}}
+          <p> email: happy21@gmail.com </p>
+          <p> ps: L1234567x! </p>
+
             <div v-if="error" class="alert alert-danger">{{error}}</div>
             <form action="#" @submit.prevent="submit">
                 <label for="email">Email Address</label>
@@ -59,7 +61,7 @@ export default {
         password: ""
       },
       error: null,
-      userID: "happy"
+      userid: ""
     };
   },
   methods: {
@@ -69,12 +71,11 @@ export default {
         .signInWithEmailAndPassword(this.form.email, this.form.password)
         .then((userCredential)  => {
           var user = userCredential.user;
-          this.userID = user.uid;
+          this.userid = user.uid;
+          alert(this.userid)
           this.$router.push({
-            path: "/home",
-            params: {
-              userID: 'this.userID'
-            }});
+            name: 'home', query: {userid: this.userid}
+          });
         })
         .catch(err => {
           this.error = err.message;

@@ -2,16 +2,16 @@
   <div>
     <ul>
       <li>
-        <router-link to="/home" exact>Home</router-link>
+        <router-link to="/home" exact v-bind:userid="this.$route.params.userid">Home</router-link>
       </li>
       <li>
-        <router-link to="/profile" exact>Profile</router-link>
+        <router-link to="/profile" exact v-bind:userid="this.$route.params.userid">Profile</router-link>
       </li>
       <li>
-        <router-link to="/leaderboard" exact>Leaderboard</router-link>
+        <router-link to="/leaderboard" exact v-bind:userid="this.$route.query.userid">Leaderboard</router-link>
       </li>
       <li>
-        <router-link to="/rewards" exact>Rewards</router-link>
+        <router-link to="/rewards" exact v-bind:userid="this.$route.params.userid">Rewards</router-link>
       </li>
         <router-link to="/" exact>
         <img src = "../assets/logo.png" style="width:200px" alt = "not found"/>
@@ -20,7 +20,7 @@
         <router-link to="/newsroom" exact>Newsroom</router-link>
       </li>
       <li>
-        <router-link to="/history" exact>History</router-link>
+        <router-link to="/history" exact v-bind:userid="this.$route.params.userid">History</router-link>
       </li>
       <li>
         <router-link to="/help" exact>Help</router-link>
