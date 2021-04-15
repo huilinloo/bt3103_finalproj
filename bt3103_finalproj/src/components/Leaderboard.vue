@@ -50,7 +50,7 @@
 
 <script>
 import database from '../firebase.js'
-import firebase from '../firebase.js'
+import firebase from "firebase"
 
 export default {
     data() {
@@ -63,9 +63,8 @@ export default {
     },
     methods: {
         fetchData: function() {
-            const user = firebase.currentUser;
+            const user = firebase.auth().currentUser;
             if (user) {
-            this.userid = firebase.auth().currentUser.uid;
             database.collection('users').doc(user.uid).get().then(snapshot => {
                 this.friends_username = snapshot.data().list_friend;
                 //console.log(this.friends_username);
@@ -91,8 +90,8 @@ export default {
                 })
             });
         },
-        louUserData() {
-            const user = firebase.currentUser;
+        loadUserData: function() {
+            const user = firebase.auth().currentUser;
             if (user) {
                 this.login = true;
                 const uid = user.uid;
