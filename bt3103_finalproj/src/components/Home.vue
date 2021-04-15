@@ -6,7 +6,8 @@
         </div>
         <div id="info">
             <ul>
-                <li>Start Date of Initiative
+                <li>Start Date of Initiative 
+                    <p> userid is {{this.userid}} </p>
                     <h2>{{home[0].startdate}}</h2>
                 </li>
                 <li> Number of Participants 
@@ -29,16 +30,18 @@
 <script>
 import database from '../firebase.js'
 import linechart from '../linechart_home.js'
+import firebase from "firebase";
 
-export default{
+export default {
     components:{
         'line-chart':linechart
     },
     data : function(){
-    return{
+        return{
         home: [],
-        totalPlastic:0,
-        totalTarget:0
+        totalPlastic: 0,
+        totalTarget: 0,
+        userd: ""
         }
     },
     methods:{
@@ -49,7 +52,8 @@ export default{
                     item=doc.data()
             item.id=doc.id
             this.home.push(item) 
-            }) })    
+            }) })
+            this.userid = firebase.auth().currentUser.uid;    
     },   
     findTotalPlastic: function() {
         this.totalPlastic=0

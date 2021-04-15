@@ -2,6 +2,7 @@
     <div id = "rewards">
         <div class = "pts_desc">
             <h2>You have </h2>
+            <p> userid is {{this.userid}} </p>
             <b id = "num_pts">{{this.points}}</b><span id = "pts">Pts</span>
         </div>
         <br>
@@ -21,6 +22,8 @@
 <script>
 import database from '../firebase.js'
 import firebase from 'firebase/app'
+import fs from 'firebase'
+
 export default {
     data() {
         return {
@@ -29,7 +32,8 @@ export default {
                 {name: "Gong Cha $3 voucher", value: 500, url:"http://www.gong-cha-sg.com/wp-content/uploads/2017/11/1.png"},
                 {name: "Seastainable Straw Set", value:500, url:"https://cdn.shopify.com/s/files/1/2505/0888/products/straw-silver_b6f94502-7a86-4ee9-8a62-04ec20208ce5_2048x.png?v=1563447283"},
                 {name: "FairPrice $5 voucher", value: 1000, url:"https://oroinc.com/b2b-ecommerce/wp-content/uploads/sites/3/2019/07/fairprice-1500x1500-1.png"}
-            ]
+            ],
+            userid: ""
         }
     },
     methods: {
@@ -49,7 +53,8 @@ export default {
     fetchData: function() {
             database.collection('users').doc('1').get().then(snapshot => {
                 this.points = snapshot.data().points;
-                });
+            });
+            this.userid = fs.auth().currentUser.uid; 
     }
     },
     created() {
