@@ -63,7 +63,7 @@ export default {
     },
     methods: {
         fetchData: function() {
-            database.collection('users').doc('1').get().then(snapshot => {
+            database.collection('users').doc('userid').get().then(snapshot => {
                 this.friends_username = snapshot.data().list_friend;
                 //console.log(this.friends_username);
                 //console.log(this.friends_username.length);
