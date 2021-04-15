@@ -122,7 +122,7 @@ export default {
                 firebase.firestore().collection("users").doc(uid).set({
                   email: this.form.email,
                   friends: 0,
-                  list_friend: []
+                  list_friend: [],
                   password: this.password,
                   phone: this.form.phone,
                   points: 0,
