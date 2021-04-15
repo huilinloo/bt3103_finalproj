@@ -1,20 +1,20 @@
 <template>
     <div id = "container">
         <div id = "logo">
-            <img class = "logo" src = "../assets/logo.png"/>
+            <img class = "logo" src = "../assets/logo1.png"/>
             <p>Say no to single-use plastics, <br>switch to reusable.</p>
         </div>
         <div id = "all_buttons">
             <h1> Welcome Back! </h1>
             <div id = "users">
                 <button v-on:click = "toUserLogin">
-                <img class = "icons" src = "http://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png"/>
+                <img class = "icons" src = "../assets/user-icon.png"/>
                  User Login</button>
                 <br>
             </div>
             <div id = "merchants">
                 <button v-on:click = "toMerchantLogin">
-                <img class = "icons" src = "https://static.thenounproject.com/png/2286059-200.png"/>
+                <img class = "icons" src = "../assets/merchant-icon.png"/>
                 Merchant Login</button>
             </div>
         </div>
