@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <app-header v-if="!['/', '/login', '/signup', '/merchant-login', '/merchant-inputs'].includes($route.path)"></app-header>
+    <app-header v-if="!['/', '/login', '/signup', '/merchant-login', '/merchant-inputs', '/forgot-password'].includes($route.path)"></app-header>
     <!--<app-navbar></app-navbar>-->
     <router-view></router-view>
   </div>
