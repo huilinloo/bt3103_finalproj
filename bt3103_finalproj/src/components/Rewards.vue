@@ -2,7 +2,6 @@
     <div id = "rewards">
         <div class = "pts_desc">
             <h2>You have </h2>
-            <p> userid is {{this.userid}} </p>
             <b id = "num_pts">{{this.points}}</b><span id = "pts">Pts</span>
         </div>
         <br>
@@ -40,21 +39,23 @@ export default {
     clicked: function(index) {
         var reward = this.rewards[index];
         if (this.points >= reward.value) {
-        alert("Redeemption successful. Take a photo of this page and show to the respective merchant");
-        var updatedPoints = this.points - reward.value;
-        database.collection('users').doc('1').update({redeemed: firebase.firestore.FieldValue.arrayUnion(reward.name)})
-        database.collection('users').doc('1').update({
-            points: updatedPoints
-        }).then(() => location.reload());
+            alert("Redemption successful. Take a photo of this page and show to the respective merchant");
+            var updatedPoints = this.points - reward.value;
+            database.collection('users').doc(this.userid).update({redeemed: firebase.firestore.FieldValue.arrayUnion(reward.name)})
+            database.collection('users').doc(this.userid).update({
+                points: updatedPoints
+            });
+            this.$router.push('History')
         } else{
             alert("Redemption unsuccessful. Save more plastic!")
         }
     },
     fetchData: function() {
-            database.collection('users').doc('1').get().then(snapshot => {
-                this.points = snapshot.data().points;
-            });
-            this.userid = fs.auth().currentUser.uid; 
+        this.userid = fs.auth().currentUser.uid;
+        database.collection('users').doc(this.userid).get().then(snapshot => {
+            this.points = snapshot.data().points;
+        });
+             
     }
     },
     created() {

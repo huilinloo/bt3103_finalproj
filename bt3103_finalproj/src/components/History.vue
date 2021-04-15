@@ -1,7 +1,7 @@
 <template>
     <div id="history">
         <h1>Past Transctions</h1>
-        <h2>Your most three recent reward redemptions </h2>
+        <h2>Your most recent reward redemptions </h2>
         <br><br>
         <h2> From Most Recent </h2>
         <ul>
