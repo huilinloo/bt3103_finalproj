@@ -13,7 +13,7 @@
       <li>
         <router-link to="/rewards" exact v-bind:userid="this.$route.params.userid">Rewards</router-link>
       </li>
-        <router-link to="/" exact>
+        <router-link to="/home" exact>
         <img src = "../assets/logo.png" style="width:200px" alt = "not found"/>
         </router-link>
       <li>
