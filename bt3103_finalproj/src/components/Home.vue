@@ -7,7 +7,6 @@
         <div id="info">
             <ul>
                 <li>Start Date of Initiative 
-                    <p> userid is {{this.userid}} </p>
                     <h2>{{home[0].startdate}}</h2>
                 </li>
                 <li> Number of Participants 

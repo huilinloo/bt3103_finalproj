@@ -45,5 +45,20 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "description": "update",
+  "main": "babel.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huilinloo/bt3103_finalproj.git"
+  },
+  "keywords": [
+    "update"
+  ],
+  "author": "group 16",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huilinloo/bt3103_finalproj/issues"
+  },
+  "homepage": "https://github.com/huilinloo/bt3103_finalproj#readme"
 }

@@ -3,8 +3,6 @@
     <img src="https://i.postimg.cc/3x2ksmnP/forest-bathing.jpg">
         <div class="login">
           <h3><Strong>Login</Strong></h3><br>
-          <p> email: happy21@gmail.com </p>
-          <p> ps: L1234567x! </p>
 
             <div v-if="error" class="alert alert-danger">{{error}}</div>
             <form action="#" @submit.prevent="submit">
@@ -72,7 +70,6 @@ export default {
         .then((userCredential)  => {
           var user = userCredential.user;
           this.userid = user.uid;
-          alert(this.userid)
           this.$router.push({
             path: '/home'
           });
@@ -177,8 +174,8 @@ label {
 	border-radius: 6px;
 	background: #FFF;
     position:absolute;
-    top:30%;
-    left:42%;
+    top:25%;
+    left:45%;
     margin-top:-50px; /* this is half the height of your div*/  
     margin-left:-100px; /*this is half of width of your div*/
 }

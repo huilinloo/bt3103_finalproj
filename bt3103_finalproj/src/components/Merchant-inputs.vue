@@ -1,6 +1,6 @@
 <template>
 <div id="app">
-  <img src="https://i.postimg.cc/4xwY4sR5/wolrd-environmental-day-copy-2.jpg" align="left">
+  <img src="https://i.postimg.cc/7LQRBLHq/7185e7cef035e7953dca686a68483823.png" align="left">
     <form ref= "anyName" action="#" @submit.prevent="addPoints">
 	<div class="input_container">
         <h3><Strong>Add Customer Points</Strong></h3><br>
@@ -181,7 +181,7 @@ li:before {
 	border-radius: 6px;
 	background: #FFF;
     position:absolute;
-    top:25%;
+    top:20%;
     left:65%;
     margin-top:-50px; /* this is half the height of your div*/  
     margin-left:-100px; /*this is half of width of your div*/

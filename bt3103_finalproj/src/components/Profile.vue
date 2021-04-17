@@ -2,7 +2,6 @@
     <div id="profile">
         <div id="user">
             <img src="https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg">
-            {{"userid is " + this.userid}}
             <h1> {{user[0].username}} </h1>
             <p1> {{'MEMBER SINCE '+user[0].startdate}} </p1>
         </div>

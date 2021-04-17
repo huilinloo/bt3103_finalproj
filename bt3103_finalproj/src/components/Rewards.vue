@@ -2,7 +2,6 @@
     <div id = "rewards">
         <div class = "pts_desc">
             <h2>You have </h2>
-            <p> userid is {{this.userid}} </p>
             <b id = "num_pts">{{this.points}}</b><span id = "pts">Pts</span>
         </div>
         <br>
