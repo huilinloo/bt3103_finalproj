@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <img
-      src="https://i.postimg.cc/4xwY4sR5/wolrd-environmental-day-copy-2.jpg"
-      align="left"
-    />
+    <img src="../assets/merchant.jpg" align="left" />
     <form ref="anyName" action="#" @submit.prevent="addPoints">
       <div class="input_container">
         <h3><Strong>Add Customer Points</Strong></h3>

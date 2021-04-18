@@ -121,7 +121,6 @@ export default {
                 //add to users collection
                 firebase.firestore().collection("users").doc(uid).set({
                   email: this.form.email,
-                  friends: 0,
                   list_friend: [],
                   password: this.password,
                   phone: this.form.phone,
@@ -130,7 +129,9 @@ export default {
                   thisweek: 0,
                   totalplastic: 0,
                   username: this.form.name,
-                  weeklygoal: 0
+                  weeklygoal: 0,
+                  list_plastic: {},
+                  plastic_cat: {}
                 });
                 alert("Successfully signed up! Please login.")
                 this.$router.push('/login');
