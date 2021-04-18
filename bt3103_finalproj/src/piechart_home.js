@@ -1,27 +1,12 @@
-import {Bar, mixins} from 'vue-chartjs'
+import {Pie, mixins} from 'vue-chartjs'
 const { reactiveProp } = mixins
 
 export default{
-    extends:Bar,
+    extends:Pie,
     mixins: [reactiveProp],
     data () {
         return {
           options: { 
-            scales: {
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true
-                },
-                gridLines: {
-                  display: true
-                }
-              }],
-              xAxes: [ {
-                gridLines: {
-                  display: false
-                }
-              }]
-            },
             legend: {
                 labels: {
                     fontSize: 30

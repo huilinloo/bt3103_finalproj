@@ -4,20 +4,32 @@ const { reactiveProp } = mixins
 export default{
     extends:Line,
     mixins: [reactiveProp],
-    options: {
-        layout:{
-            padding:{
-                left: 5,
-                right: 0,
-                top: 0,
-                bottom: 10
-            }
-        },
-        legend: {
-            position:'left',
-            labels: {
-                fontSize: 25
-            }
+    data () {
+        return {
+          options: { 
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                },
+                gridLines: {
+                  display: true
+                }
+              }],
+              xAxes: [ {
+                gridLines: {
+                  display: false
+                }
+              }]
+            },
+            legend: {
+                labels: {
+                    fontSize: 30
+                }
+            },
+            responsive: true,
+            maintainAspectRatio: false
+          }
         }
     },
     mounted(){

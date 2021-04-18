@@ -3,13 +3,18 @@
         <h1 id="w">{{'Welcome back, ' + this.name + '!'}}</h1> <br>
         <div id="chart">
             <h2> Weekly Trend of Platic You Saved </h2>
-            <line-chart :chart-data="datacollection" :options="chartOptions" :height="200"> </line-chart>
+            <line-chart :chart-data="datacollection" :height="800"> </line-chart>
             <button @click="fillData()">Show</button>
         </div>
         <div id="info">
             <h2> Number of Merchants and Users in GreenSG </h2>
-            <bar-chart :chart-data="datacollection1"> </bar-chart>
+            <bar-chart :chart-data="datacollection1" :height="400"> </bar-chart>
             <button @click="fillData1()">Show</button>
+        </div>
+        <div id="pie">
+            <h2> Plastic You Saved in Different Categories </h2>
+            <pie-chart :chart-data="datacollection2" :height="400"> </pie-chart>
+            <button @click="fillData2()">Show</button>
         </div>
     </div>
 </template>
@@ -19,10 +24,12 @@ import database from '../firebase.js'
 import linechart from '../linechart_home.js'
 import firebase from "firebase"
 import barchart from '../barchart_home.js'
+import piechart from '../piechart_home.js'
 export default{
     components:{
         'line-chart':linechart,
-        'bar-chart':barchart
+        'bar-chart':barchart,
+        'pie-chart':piechart
     },
     data : function(){
     return{
@@ -32,9 +39,10 @@ export default{
         start: "",
         name: "",
         plastic: {},
+        cat: {},
         me: [],
         datacollection1: null,
-        chartOptions:null
+        datacollection2: null
         }
     },
     methods:{
@@ -46,19 +54,20 @@ export default{
             item.id=doc.id
             this.home.push(item) 
             }) });
-            
-            this.userid = firebase.auth().currentUser.uid; 
-            database.collection('users').doc(this.userid).get().then(snapshot => {
-                this.start = snapshot.data().startdate
-                this.name = snapshot.data().username
-                this.plastic = snapshot.data().list_plastic
-            }); 
             database.collection('merchants').get().then((querySnapShot)=>{
                 let item={}
                 querySnapShot.forEach(doc=>{
                     item=doc.data()
                     this.me.push(item) 
             }) }); 
+            
+            this.userid = firebase.auth().currentUser.uid; 
+            database.collection('users').doc(this.userid).get().then(snapshot => {
+                this.start = snapshot.data().startdate
+                this.name = snapshot.data().username
+                this.plastic = snapshot.data().list_plastic
+                this.cat = snapshot.data().plastic_cat
+            }); 
     },   
     fillData() {
         this.datacollection = {
@@ -80,15 +89,7 @@ export default{
                 
               }
           ]
-        },
-        this.chartOptions = {
-            legend: {
-                position:'left',
-                labels: {
-                    fontSize: 25
-                }
-            }
-        }   
+        } 
     } ,
     fillData1() {
         this.datacollection1 = {
@@ -97,29 +98,41 @@ export default{
               {
                 label: 'Number',
                 data: [this.me.length, this.home.length],
-                backgroundColor:['#70dbdb', '#bdf5bd'],
+                backgroundColor:['#70dbdb', '#004d99'],
                 borderWidth: 2,
                 borderColor:"#000"
               }
             ]
         }   
-    }
+    },
+    fillData2() {
+        this.datacollection2 = {
+            labels: ['Plastic Bag', 'Plastic Container', 'Plastic Straw'],
+                datasets: [
+              {
+                label: 'G',
+                data: [this.cat["plastic_bag"], this.cat["plastic_container"], this.cat["straw"]],
+                backgroundColor:['#009933', '#5cd65c', '#bdf5bd'],
+                borderWidth: 2,
+                borderColor:"#000"
+              }
+            ]
+        }   
+    },
+
     },
     created(){
         this.fetchItems()
     },
     mounted() {
         this.fillData(),
-        this.fillData1()
+        this.fillData1(),
+        this.fillData2()
     },
 }
 </script>
 
 <style scoped>
-line-chart{
-    height: 200px;
-}
-
 h2 {
     font-weight: bold;
 }
@@ -128,7 +141,6 @@ h2 {
     left: 3%;
 }
 #chart{
-  height:200px;
   width:70%;
   padding:30px;
   float:left;
@@ -140,9 +152,16 @@ li {
 #info{
     width: 30%;
     float: right;
-    position: absolute;
-    top: 27%;
+    top: 20%;
     left: 70%;
+    position: absolute;
+}
+#pie {
+    width: 30%;
+    float: right;
+    top: 60%;
+    left: 70%;
+    position: absolute;
 }
 
 ul{
