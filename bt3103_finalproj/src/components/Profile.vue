@@ -3,7 +3,7 @@
         <div id="user">
             <img src="https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg">
             <h1> {{this.name}} </h1>
-            <p1> {{'MEMBER SINCE '+ this.date}} </p1> <br> <br>
+            <p> {{'MEMBER SINCE '+ this.date}} </p> <br> <br>
             <form id="fm">
                 <h1> Add Friends </h1>
                 <label>Friend's Username </label>
@@ -20,10 +20,10 @@
         <div id="lifetime">
             <h1 id="l">Lifetime Statistics</h1> <br>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqrsTh0P06Y5o3PSd-4PKbuo-eS-ttZAtp8Us6brIytrxhq4WD15hlZzOOqD8vk7W6HmE&usqp=CAU" id="img2">
-            <h1> {{this.friends + ' FRIENDS'}} </h1>
+            <br><br><h1> {{this.friends + ' FRIENDS'}} </h1>
         </div>
         <div id="plastic">
-            <img src="https://image.flaticon.com/icons/png/512/2639/2639818.png" id="img1">
+            <img src="https://image.flaticon.com/icons/png/512/2639/2639818.png" id="img1"> 
             <h1> {{this.totalplastic + 'G PLASTIC SAVED'}}</h1>
         </div>
     </div>
@@ -74,9 +74,6 @@ export default {
     },
     addFriend:function(){
         for (let i = 0; i < this.user.length; i++) {
-            console.log(this.user[i].username)
-            console.log(this.fname)
-            console.log(this.user[i].id)
             if (this.fname == this.user[i].username) {
                 this.exsit ='yes'
                 this.fid = this.user[i].id
@@ -100,6 +97,7 @@ export default {
         }
         this.fname=""
         this.exsit='no'
+        window.location.reload()
     },   
     },
     created(){
@@ -118,6 +116,9 @@ export default {
     float:left;
     width:50%;
     padding:30px;
+}
+p {
+    font-weight: bold;
 }
 
 #bar{
@@ -142,14 +143,14 @@ export default {
     height: 50%;
     float: right;
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
 }
 
 #plastic {
     float: right;
     position: absolute;
-    top: 58%;
+    top: 62%;
     left: 75%;
 }
 #img1{
@@ -157,8 +158,8 @@ export default {
     height: 280px;
 }
 #img2{
-    width: 280px;
-    height: 280px;
+    width: 270px;
+    height: 270px;
 }
 
 ul{

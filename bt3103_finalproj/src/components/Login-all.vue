@@ -1,8 +1,14 @@
 <template>
     <div id = "container">
         <div id = "logo">
-            <img class = "logo" src = "../assets/logo.png"/>
-            <p>Say no to single-use plastics, <br>switch to reusable.</p>
+            <img class = "logo" src = "../assets/logo.png"/> <br>
+            <p>Say no to single-use plastics, switch to reusable. </p> 
+            <p> Total Plastic Saved in SG: </p>
+            <h2> {{totalPlastic + 'G'}} </h2> 
+            <p> Total Users Joined in SG: </p>
+            <h2> {{user.length + ' People'}} </h2> 
+            <p> Total Weekly Target of Saving Plastic: </p>
+            <h2> {{totalTarget + 'G'}} </h2> 
         </div>
         <div id = "all_buttons">
             <h1> Welcome Back! </h1>
@@ -21,8 +27,28 @@
     </div>
 </template>
 <script>
+import database from '../firebase.js'
+
 export default {
+    data : function(){
+        return{
+            user: [],
+            totalPlastic:0,
+            totalTarget:0,
+        }
+    },
     methods: {
+        fetchItems:function(){
+            database.collection('users').get().then((querySnapShot)=>{
+                let item={}
+                querySnapShot.forEach(doc=>{
+                item=doc.data()
+                item.id=doc.id
+                this.user.push(item) 
+                this.totalPlastic += item.totalplastic
+                this.totalTarget += item.weeklygoal
+            }) })
+        },   
         toUserLogin() {
             this.$router.push('/login')
         },
@@ -30,6 +56,9 @@ export default {
         toMerchantLogin() {
             this.$router.push('/merchant-login')
         }
+    },
+    created(){
+        this.fetchItems()
     }
 }
 </script>
@@ -56,6 +85,10 @@ button {
     background-color: #FCF6F5FF;
 }
 
+h2 {
+    font-weight: bold;
+}
+
 button:hover {
     border: 5px solid black;
     display: block;
@@ -74,7 +107,7 @@ button:hover {
 }
 
 .logo {
-    padding-top: 100px;
+    padding-top: 60px;
     width: 700px;
     height: auto;
 }
