@@ -246,7 +246,8 @@ body {
 
 img {
   padding-left: 200px;
-  height: 800px;
+  height: 1000px;
+  padding-top: 130px;
 }
 
 body {

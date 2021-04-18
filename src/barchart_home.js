@@ -23,9 +23,7 @@ export default{
               }]
             },
             legend: {
-                labels: {
-                    fontSize: 30
-                }
+                labels: false
             },
             responsive: true,
             maintainAspectRatio: false
