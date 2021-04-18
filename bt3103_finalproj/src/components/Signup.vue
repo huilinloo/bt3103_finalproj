@@ -131,6 +131,7 @@ export default {
                   username: this.form.name,
                   weeklygoal: 0,
                   list_plastic: {},
+                  plastic_cat: {}
                 });
                 alert("Successfully signed up! Please login.")
                 this.$router.push('/login');
