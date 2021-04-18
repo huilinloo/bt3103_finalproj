@@ -50,7 +50,7 @@
 
 <script>
 import database from '../firebase.js'
-import firebase from '../firebase.js'
+import firebase from 'firebase'
 
 export default {
     data() {
@@ -63,57 +63,41 @@ export default {
     },
     methods: {
         fetchData: function() {
-            const user = firebase.currentUser;
-            if (user) {
             this.userid = firebase.auth().currentUser.uid;
-            database.collection('users').doc(user.uid).get().then(snapshot => {
+
+            //to get ranking among Friends
+            database.collection('users').doc(this.userid).get().then(snapshot => {
                 this.friends_username = snapshot.data().list_friend;
-                //console.log(this.friends_username);
+                console.log(this.friends_username);
                 //console.log(this.friends_username.length);
                 //console.log(typeof this.friends_username);
                 for (var index in this.friends_username) {
-                    console.log(this.friends_username[index]);
-                    database.collection('users').where('username', '==', this.friends_username[index]).get().then(querySnapshot => {
-                        querySnapshot.forEach((doc) => {
-                            var plastic = doc.data().totalplastic;
-                            this.friends.push({username: doc.data().username, total_plastic: plastic});
+                console.log(this.friends_username[index]);
+                database.collection('users').where('username', '==', this.friends_username[index]).get().then(querySnapshot => {
+                    querySnapshot.forEach((doc) => {
+                        var plastic = doc.data().totalplastic;
+                        this.friends.push({username: doc.data().username, total_plastic: plastic});
                     }) 
-                    });
-                }
-                })
+                });
             }
-
+            });
+            
+            //to get ranking among SG users
             database.collection('users').get().then(snapshot => {
                 snapshot.docs.forEach(doc => {
                     var user = doc.data()
-                    console.log(user)
+                    //console.log(user)
                     this.sg.push({username: user.username, total_plastic: user.totalplastic})
                 })
             });
         },
-        louUserData() {
-            const user = firebase.currentUser;
-            if (user) {
-                this.login = true;
-                const uid = user.uid;
-                console.log("userid " + uid);
-                database
-                .collection('users')
-                .doc(uid)
-                .get()
-                .then((doc) => {
-                    this.userData = doc.data();
-                    this.userData.id = doc.id;
-                });
-            }
-        },
+
         sortArrays: function(arrays) {
             return arrays.sort((a, b) => b.total_plastic - a.total_plastic).slice(0, 10);
         }
     },
     created() {
-        this.fetchData()
-        this.loadUserData();
+        this.fetchData();
     }
 }
 </script>
