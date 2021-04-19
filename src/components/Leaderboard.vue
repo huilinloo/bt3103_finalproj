@@ -21,7 +21,7 @@
                     <th><img src = "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png" class = "user_img"> User</th>
                     <th><img src = "https://cdn4.iconfinder.com/data/icons/plastic-bag/100/plastic_bag-06-512.png" class = "plastic_img"> Total Plastic Saved</th>
                 </tr>
-                <tr v-for="(user, index) in sortArrays(sg)" :key = "index">
+                <tr v-for="(user, index) in sortedSG" :key = "index">
                     <td class = "position"><b>{{index+1}}</b></td>
                     <td>{{user.username}}</td>
                     <td>{{user.total_plastic}}</td>
@@ -36,7 +36,7 @@
                     <th><img src = "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png" class = "user_img"> User</th>
                     <th><img src = "https://cdn4.iconfinder.com/data/icons/plastic-bag/100/plastic_bag-06-512.png" class = "plastic_img"> Total Plastic Saved</th>
                 </tr>
-                <tr v-for="(user, index) in sortArrays(friends)" :key = "index">
+                <tr v-for="(user, index) in sortedFriends" :key = "index">
                     <td class = "position"><b>{{index+1}}</b></td>
                     <td>{{user.username}}</td>
                     <td>{{user.total_plastic}}</td>
@@ -59,6 +59,14 @@ export default {
             userid: ""
         }
     },
+    computed: {
+        sortedFriends: function() {
+            return this.sortArrays(this.friends)
+        },
+        sortedSG: function() {
+            return this.sortArrays(this.sg)
+        }
+    },
     methods: {
         getFriendsDetails: function() {
             database.collection('users').where('username', 'in', this.friends_username).get().then(querySnapshot => {
@@ -68,27 +76,28 @@ export default {
                 }) 
             });
         },
+        getSGUsersDetails: function() {
+            //to get ranking among SG users
+            database.collection('users').get().then(snapshot => {
+                snapshot.docs.forEach(doc => {
+                    var user = doc.data()
+                    this.sg.push({username: user.username, total_plastic: user.totalplastic})
+                })
+            });
+        },
         fetchData: function() {
             this.userid = firebase.auth().currentUser.uid;
 
             //to get ranking among Friends
             database.collection('users').doc(this.userid).get().then(snapshot => {
-
                 var list_friend = snapshot.data().list_friend;
                 for (var index in list_friend) {
                     this.friends_username.push(list_friend[index])
                 }
+                //console.log("typeof " + typeof list_friend)
                 this.getFriendsDetails();
             });
-            
-            //to get ranking among SG users
-            database.collection('users').get().then(snapshot => {
-                snapshot.docs.forEach(doc => {
-                    var user = doc.data()
-                    console.log(user)
-                    this.sg.push({username: user.username, total_plastic: user.totalplastic})
-                })
-            });
+            this.getSGUsersDetails()
         },
 
         sortArrays: function(arrays) {
