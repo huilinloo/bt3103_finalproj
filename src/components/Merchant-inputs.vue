@@ -130,7 +130,6 @@ export default {
           this.sameNumber = true;
           this.username = user[1].username;
           this.id = user[0];
-          //console.log(this.id)
         }
       }
       if (this.sameNumber == false) {
@@ -142,7 +141,7 @@ export default {
     addPoints: function() {
       if (this.sameNumber == false) {
         alert("Invalid phone number!");
-        this.$router.push("/merchant-inputs"); //why cannot?
+        this.$router.push("/merchant-inputs");
       } else {
         this.new_points = this.calc_total;
         console.log(this.new_points);
@@ -156,15 +155,9 @@ export default {
           }
         }
 
-        console.log("list of plastic" + this.list_plastic);
-        console.log("current amount of points" + this.curr_points);
-        console.log("type of curr_points" + typeof this.curr_points);
-
         //update points and plastic field
         this.updated_points = this.curr_points + this.new_points;
         this.updated_plastic = this.curr_plastic + this.new_points;
-        console.log("new points" + this.new_points);
-        console.log("updated amt of points" + this.updated_points);
 
         //if user makes 2nd purchase on the same day, this.date should exist in this.list_plastic object already
         if (this.date in this.list_plastic) {
@@ -184,8 +177,6 @@ export default {
           this.plastic_cat["plastic_bag"] + this.pb_qty * 10;
         this.plastic_cat["plastic_container"] =
           this.plastic_cat["plastic_container"] + this.pc_qty * 20;
-
-        console.log("updated list of plastic" + this.list_plastic);
 
         database
           .collection("users")
