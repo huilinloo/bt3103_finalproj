@@ -17,10 +17,8 @@
         <br /><br />
         <label style="font-size: 20px;" for="points">Points Earned: </label
         ><br />
-        <!--<input type="number" class="form-control form-control-lg" v-model.number.lazy="new_points" v-on:click="checkPhone()" required/>-->
         <br />
 
-        <!--<p id = "allocation"><b>Information on points allocation</b></p>-->
         <form id="my_form"></form>
         <table id="info">
           <tr>
@@ -83,7 +81,6 @@
 
 <script>
 import database from "../firebase.js";
-//import firebase from 'firebase/app'
 
 export default {
   data() {
@@ -200,10 +197,6 @@ export default {
             plastic_cat: this.plastic_cat,
           });
         alert("Successfully added points!");
-        //location.reload();
-        //this.username = '';
-        //this.new_points = null;
-        //this.$refs.anyName.reset();
       }
     },
     getTodaysDate: function() {
