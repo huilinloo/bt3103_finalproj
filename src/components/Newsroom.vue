@@ -53,6 +53,7 @@
 
 <script>
 //import axios from "axios";
+//remove comments in methods and leave articles as [] to view newsAPI when run locally
 export default {
   name: "newslist",
   data() {
